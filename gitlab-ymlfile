@@ -1,0 +1,33 @@
+#image: image_name
+#default: 
+  #tags: 
+    #- runner_name
+variables:
+  var: '12'
+
+stages:
+  - build
+  
+
+build_job: 
+  variables: 
+    var1: 'Hello'
+   
+  stage: build
+  before_script:
+    - apt update -y
+    - apt install maven -y
+  script:
+    - ls
+    - mvn clean package
+  after_script:
+    - echo "Completed"
+    - echo "$var $var1"
+  artifacts:
+    paths:
+    - /builds/group14040701/new-project/target/bus-booking-app-1.0-SNAPSHOT.jar
+    - ls
+    - echo "artifacts uploded"
+
+  rules: 
+    - if: '$CI_COMMIT_MESSAGE =~ /Update/i'
