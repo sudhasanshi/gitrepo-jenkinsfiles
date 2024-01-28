@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+  parameters {
+    string defaultValue: 'sudha', description: 'provide your name', name: 'name'
+    string defaultValue: 'BLR', description: 'provide your location', name: 'location'
+  }
+  stages {
+    stage('parameter') {
+      steps {
+        echo "Hi ${params.name}. Welcome to ${params.location}."
+      }
+    }
+  }
+
+}
