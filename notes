@@ -1,0 +1,37 @@
+CI(continueous Integration)- integrate the changes from development team continously without manual intervention. so that we can give quick feedback to developer for their changes.
+CD(continueous Deployment) - tested build shoud be deploy to production env as early as possible.
+CD(continueous delivery)-each changes from development team shoud be build and deployed to test env to test the changes.
+
+How do you secure jenkin?
+we have used matrix based security. it provides check boxes, whichever the check-boxes we check user will have those permissions. 
+to set-up this we have to go to manage jenkins-security-authentication(inside this we have to select) authorization(we have to select from drop-down) matrix based security
+here we have to add user or group and need to check the check-boxes.
+
+different types of security
+a)matrix based security
+b)role based security
+c)project based security
+
+different type of jobs
+a)freestyle jobs
+b)pipeline jobs
+c)multi-branch pipeline jobs
+d)git-hub organization pipeline
+
+types of build triggers
+1)build after other jobs build
+  -here we can schedule the jobs after other jobs are build based on success or failure
+2)build periodically
+  -It will trigger the jenkin job based on time weather commit or no-commit
+3)Poll SCM
+  -It will trigger the jenkin job based on commit. if there are any commites within specified time it will trigger the job at specified time.
+4)Webhook
+  -It will trigger the jenkin job as soon as commit was done  
+
+how to create jenkin job steps
+1.go to dashbord of jenkin,click on new items and select the type of job,type the name of job and click on ok.
+2.in configure page under scm need to select git and copy paste the URL of git repo and provide credentials to clone repo.
+3.under build trigger need to select required build trigger method and in build section select execute shell and type the commands to build.
+4.under post build action, need to select appropriate actions which required. it may be deployment,sending email,triggering other jobs,running test cases.
+
+How do you install plugins
