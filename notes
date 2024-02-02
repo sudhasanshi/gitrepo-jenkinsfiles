@@ -34,4 +34,58 @@ how to create jenkin job steps
 3.under build trigger need to select required build trigger method and in build section select execute shell and type the commands to build.
 4.under post build action, need to select appropriate actions which required. it may be deployment,sending email,triggering other jobs,running test cases.
 
-How do you install plugins
+
+How do you install plugins if it's there in availble plugins
+go to manage jenkins , click on manage plugin,under advanced tab upload the plugin file and install without restart.
+we need to download plugin file from jenkins update centre
+the downloaded plugin file will be in .hpi format(file with .hpi extension)
+
+which are the plugins you have installed?
+1)parameterized plugin-it is used to pass parameter to jenkins job. I have configured parameterized plugin for deployment job.
+  deployment job has two parameters one is severname and build number. these values are passed to the deployment script inside jenkin job.
+2)gearman plugin- It is high availbility plugin.if jenkin master goes down,jenkin will be up and running automatically on other server.
+  gearman plugin allow us to add server details(second server). when jenkin is running on first master both the servers will be in sync. 
+  as soon as jenkin master goes down, jenkin will be up and running on other servers.
+3)publish over CIFS-it is used to copy files from linux to windows.
+4)sonarscanner
+5)artifactory tools
+6)git, upstream,downstream
+
+why slave machine are required/
+master slave are used to distribute load to different server and also we can run specific job on specific servers.
+eg: if I want to compile java source code on server which provides java environment only.
+
+notes:
+1.normally we will never run jobs on master
+2.normally 10-15 slaves will be there
+3.we will use labels to run on availble slaves.
+
+Jenkins pipeline 
+groovy script is used for defining jobs in jenkins pipeline
+types
+1.declarative pipeline
+2.scripted pipeline
+
+Jenkins file-it is file where we put all our job configuration to achieve multiple instance execution
+            (by default it will take one executor until and unless we configure more executor in single pipeline job
+			
+			
+1.declarative pipeline - here we are going to use keyword pipeline
+  pipeline{}
+  
+we are going to use agent to run jobs on specific server.
+agent - agent is block which is used to define which jobs to be run on which server
+
+there are 4 types of agents
+1.agent any -it is defined always at the pipeline level. I can not define this agent at the stage level. it can run on any availble server based on load.
+2.agent docker-here image is used to run the jobs
+3.agent none-if I define agent as none at the pipeline level then it is mandatory to define on each and every stages.  
+4.label-if I want to run jobs on specific server then go with the label.
+    agent {label='slave'}
+	
+2.scripted pipeline - here we are going to use the keyword node
+ node {}
+ instead of agent we are going to use pass the server name to runthe jobs.
+ nade ('slave') {}
+ 
+	
