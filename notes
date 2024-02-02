@@ -87,5 +87,58 @@ there are 4 types of agents
  node {}
  instead of agent we are going to use pass the server name to runthe jobs.
  nade ('slave') {}
+
+
+pipeline job-in normal pipeline, job is meant for building the specific branch from SCM and deploy to respective environments.
+              pipeline job supports both pipeline steps to be added in jenkins configure and scm. we can use the pipeline for Adhoc job,
+              parameterized job, execution and to debugging pipeline as code.
+
+multi-branch pipeline - Is ment for building multiple branches from repo and deploy to respective environments (dev.uat.prod)
+                        it works with different branches of pipeline and it creates number of pipeline as the number of branches containing jenkinfile
+note-don't use multi-branch pipeline if you don't have standard branching startegy and CICD stages.
+
+
+Jenkin-backup path?
+/var/lib/jenkins take backup of this path and push to repo.(for this we can have separate job which should run on every-night)
+
+Jenkins port number change path
+/etc/default/jenkins file
+http_port =8081
+			  
+	
+master-slave configuration steps?
+go to manage jenkin-manage nodes-click on permanent agent-no of executor(2)-root path/directory
+(where this jenkin jobs should run /home/slave/jenkins(create this jenkin folder/dir in slave user) add credentials(ssh using private key id_rsa of slave)
+select name of credentials-known hosts verification strategy.
+
+java should be installed installed on both master and slave
+
+slave
+sudo su -
+adduser slave
+adduser slave
+provide password
+sudo su - slave
+ssh-keygen
+cd .ssh
+cat is_rsa.pub > authorized_keys
+chmod 700 authorized_keys
+
+copy private IP and go to master server
+
+master
+sudo su -
+cd /var/lib/jenkins
+mkdir -p .ssh
+cd .ssh
+ssh-keyscan -H IP address >> /var/lib/jenkins/.ssh/known_hosts
+chmod 700 known_hosts
+chown jenkins:jenkins known_hosts
+
+then go to jenkins dashboard under credentials add credentials of user(slave)
+and private(id_rsa)values
+go to node - add node(slave) and label(ex:java)and private IP
+
+
  
 	
