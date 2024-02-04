@@ -139,6 +139,12 @@ then go to jenkins dashboard under credentials add credentials of user(slave)
 and private(id_rsa)values
 go to node - add node(slave) and label(ex:java)and private IP
 
+How do you store/secure/handle secrets in Jenkinsfile?
+
+Using the Credentials plugin, which integrates with various Jenkins features to securely store and manage credentials. 
+we can create credentials in the Jenkins UI and reference them by ID in your Jenkinsfile.
+
+
 
  
 	
