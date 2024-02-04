@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('parameter') {
       steps {
-        echo "Hi ${params.name}. Welcome to ${params.location}."
+        echo "Hi ${params.name}"
       }
     }
   }
