@@ -1,0 +1,14 @@
+pipeline {
+  agent any
+  parameters {
+    choice choices: ['dev', 'test', 'prod'], description: 'select env to deploy', name: 'env'
+  }
+  stages {
+    stage('parameter') {
+      steps {
+        echo "Hi ${params.name}. Welcome to ${params.location}."
+      }
+    }
+  }
+
+}
