@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Checkout') {
+            steps {
+                git clone https://github.com/sudhasanshi/bus_booking.git'
+            }
+        }
+        stage ('Build') {
+            steps {
+                # Install the required packages
+                sh 'pip install -r requirements.txt'
+                # Compile your python file
+                sh 'python -m py_compile main.py'
+            }
+        }
+        stage ('Test') {
+            steps {
+                # Run your test file using pytest
+                sh 'python -m pytest test.py'
+            }
+        }
+    }
+}
